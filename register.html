@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/semantic/semantic.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 p-1">
+                <div class="row">
+                    <div class="col-md-6 col-xl-4">
+                        <img src="./img/main.png" alt="" class="img-responsive img-fluid">
+                    </div>
+                    <div class="col-md-6 col-xl-4">
+                        <h1 class="text-center">Registration</h1>
+                        <div class="alert alert-danger">
+                            <p>Email or password are empty or incorrect</p>
+                        </div>
+                        <form action="dash.html" method="post">
+                            <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="username"><i class="icon user"></i><b>Username</b></label>
+                                        <input type="text" id="username" name="username" placeholder="Username" class="form-control" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="fullname"><i class="icon user"></i><b>Full name</b></label>
+                                        <input type="text" id="fullname" name="fullname" placeholder="Full name" class="form-control" required>
+                                    </div>
+                                    <div class="form-group col-md-12 ui">
+                                        <label for="email"><i class="icon mail"></i>E-mail</label>
+                                        <input type="email" id="email" name="email" placeholder="Email@example.com" class="form-control" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="cpassword"><i class="icon lock"></i><b>Confirm Password</b></label>
+                                        <input type="password" id="password_2" name="password_2" placeholder="Confirm Password" class="form-control" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="password_2"><i class="icon lock"></i><b>Password</b></label>
+                                        <input type="password" id="password" name="password" placeholder="Password" class="form-control" required>
+                                    </div>
+                            </div>
+
+                            <div class="form-group">
+                                <a href="index.html" class="text-center">I have an account</a><br>
+                                <label for="c" class="text-center"><input type="checkbox" id="c" class="ui checkbox">Remember me</label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="ui icon labeled submit button blue"><i class="icon send"></i>Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

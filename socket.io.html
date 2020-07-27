@@ -1,0 +1,87 @@
+<html>
+<body>
+<div id="graph_container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<script src="socket.io/socket.io.min.js"></script>
+<script src="./js/jquery-3.4.0.min.js"></script>
+<script src="highcharts/js/highcharts.js"></script>
+<script>
+/*
+ * Fun with node.js, socket.io and highcharts!  The trifecta of javascript libraries :)
+ * This tutorial is pretty simple yet neat and good for getting your feet wet with some newer
+ * javascript libraries.  There are 2 parts to this tutorial:
+ *
+ * 1) a Server piece written in javascript, using socket.io
+ * 2) a Client piece (this file) written in html, javascript, using socket.io
+ *
+ * This tutorial is a little unique because instead of pulling data from the Server process, the
+ * Server pushes data to us (this page), well actually anyone who pulls up this page gets updates.
+ * This is different from typical data applications that request data from the server via ajax or
+ * traditional http request methods.  The push from Server method opens up the possibility to
+ * implement realtime data feeds on your site, which would be stupid cool!
+ *
+ * To run:
+ * 1) start server process: node Server.js
+ * 2) open this file in a browser and you'll see samples being plotted from server
+ */
+$(function() {
+  Highcharts.setOptions({
+		global: {
+			useUTC: false
+		}
+	});
+	var graph = new Highcharts.Chart({
+		title: { text: 'Real Time Samples' },
+		xAxis: {
+			type: 'datetime',
+			tickPixelInterval: 100
+		},
+		yAxis: {
+			title: { text: 'Samples' },
+			tickInterval: 10,
+			min: 0,
+			max: 100
+		},
+		tooltip: {
+            formatter: function() {
+                return '<b>'+ this.series.name + '</b><br/>'
+                    + '[ ' + Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x)
+                    + ' , '
+                    + this.y + ' ]';
+            }
+		},
+		chart: {
+			type: 'spline',
+			renderTo: 'graph_container',
+			events: {
+				load: function() {
+					var series = this.series[0];
+				    var socket = io.connect('http://localhost:3131');
+				    socket.on('sample', function (sample) {
+				    	// when a sample arrives we plot it
+						series.addPoint([sample.x, sample.y], true, true);
+				    });
+				}
+			}
+		},
+        series: [{
+            name: 'Random data',
+            data: (function() {
+                // generate some points to render before real samples arrive from feed
+                var data = [],
+                    time = (new Date()).getTime(),
+                    i;
+                // 20 samples, starting 19 ms ago up to present time when feed starts plotting
+                for (i = -19; i <= 0; i++) {
+                    data.push({
+                        x: time + (i * 1000),
+                        y: 0
+                    });
+                }
+                return data;
+            })()
+        }]
+	});
+});
+</script>
+</body>
+</html>

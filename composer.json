@@ -1,0 +1,12 @@
+{
+    "name": "gui/fat.io",
+    "authors": [
+        {
+            "name": "gui",
+            "email": "chiruzabisimwa@gmail.com"
+        }
+    ],
+    "require": {
+        "facebook/php-sdk-v4" : "4.0.*"
+    }
+}
